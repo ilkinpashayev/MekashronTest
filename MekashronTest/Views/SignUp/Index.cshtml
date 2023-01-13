@@ -1,0 +1,65 @@
+﻿@model Register
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card bg-white">
+                @if (TempData["alertMessage"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["alertMessage"]
+                    </div>
+                    TempData["alertMessage"] = null;
+                }
+                @if (TempData["successMessage"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["successMessage"]
+                    </div>
+                    TempData["successMessage"] = null;
+                }
+                <div class="card-body">
+                    <form asp-controller="SignUp" asp-action="Signup" method="Post" enctype="application/x-www-form-urlencoded">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" asp-for="Email" id="Email" name="Email" placeholder="name@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" asp-for="Password" id="Password" name="Password" placeholder="*******">
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" asp-for="FirstName" id="FirstName" name="FirstName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" asp-for="LastName" id="lastName" name="lastName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mobile" class="form-label">Mobile</label>
+                            <input type="text" class="form-control" asp-for="Mobile" id="mobile" name="mobile">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mobile" class="form-label">Country</label>
+                            <select class="form-select" aria-label="" asp-for="CountryID" name="Country" id="Country">
+                                <option value="376" selected>Israel</option>
+                                <option value="840">USA</option>
+                                <option value="826">UK</option>
+                                <option value="31">Azerbaijan</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-outline-dark" type="submit">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card bg-white">
+                @if (TempData["alertMessage"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @TempData["alertMessage"]
+                    </div>   
+                        TempData["alertMessage"] = null;
+                }
+                @if (TempData["successMessage"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["successMessage"]
+                    </div>
+                    TempData["successMessage"] = null;
+                }
+
+                <div class="card-body">
+                    <form asp-controller="Home" asp-action="Login" method="Post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="*******">
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-outline-dark" type="submit">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
