@@ -14,30 +14,23 @@ namespace MekashronTest.Services
         {
             _mekashronService = mekashronService;
         }
-        public MekashronRequestResult Login(string username, string password)
+        public EntityModel Login(string username, string password)
         {
-            LoginResponse loginResponse= _mekashronService.Login(new LoginRequest() { Password= password,UserName=username,IPs="127.0.0.0" });
+            LoginResponse loginResponse= _mekashronService.Login(new LoginRequest() { Password= password,UserName=username});
 
             string response = loginResponse.@return;
-            MekashronRequestResult? mekashronRequestResult =
-            JsonSerializer.Deserialize<MekashronRequestResult>(response);
-            if (mekashronRequestResult.ResultCode == -1)
-            {
-                return mekashronRequestResult;
-            }
-            else
-            {
-                GetCustomerInfoRequest getCustomerInfoRequest = new GetCustomerInfoRequest()
-                {
-                    Username = username,
-                    Password = password
-                };
-                GetCustomerInfoResponse getCustomerInfoResponse = GetCustomerData(getCustomerInfoRequest);
+            EntityModel? mekashronLoginResult =
+            JsonSerializer.Deserialize<EntityModel>(response);
 
-                MekashronRequestResult? mekashronInfoRequestResult =
-                    JsonSerializer.Deserialize<MekashronRequestResult>(getCustomerInfoResponse.@return);
-                return mekashronInfoRequestResult;
+            if (mekashronLoginResult.Email == null)
+            {
+                MekashronRequestResult? mekashronResult =
+                   JsonSerializer.Deserialize<MekashronRequestResult>(response);
+                mekashronLoginResult.ResultMessage = mekashronResult.ResultMessage;
+
             }
+            return mekashronLoginResult;
+       
         }
 
         public MekashronRequestResult Register(RegisterNewCustomerRequest newCustomer)

@@ -17,6 +17,26 @@
                 {
                     <div class="alert alert-success" role="alert">
                         @TempData["successMessage"]
+                        <div class="row">
+                            <div class="col-12 col-md-8 col-lg-6">
+                                FirstName: @TempData["firstName"]
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-12 col-md-8 col-lg-6">
+                                LastName: @TempData["lastName"]
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-8 col-lg-6">
+                                Email: @TempData["email"]
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-8 col-lg-6">
+                                Mobile: @TempData["mobile"]
+                            </div>
+                        </div>
                     </div>
                     TempData["successMessage"] = null;
                 }

@@ -28,15 +28,21 @@ namespace MekashronTest.Controllers
         [HttpPost]
         public IActionResult Login(string username,string password)
         {
-            MekashronRequestResult mekashronRequestResult = _mekashronClient.Login(username, password);   
-            if (mekashronRequestResult.ResultCode== -1) {
+            EntityModel mekashronRequestResult = _mekashronClient.Login(username, password);   
+            if (mekashronRequestResult.Email== null) {
                 TempData["alertMessage"] = mekashronRequestResult.ResultMessage;
             }
             else
-            {                
-                TempData["successMessage"] = "Success";
-                
+            {
+                string successMessage = "Success";
+                TempData["successMessage"] = successMessage;  
             }
+
+            TempData["firstName"] = mekashronRequestResult.FirstName;
+            TempData["lastName"] = mekashronRequestResult.LastName;
+            TempData["email"] = mekashronRequestResult.Email;
+            TempData["mobile"] = mekashronRequestResult.Mobile;
+
             return RedirectToAction("index");
         }
 

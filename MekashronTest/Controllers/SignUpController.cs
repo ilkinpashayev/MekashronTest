@@ -24,19 +24,14 @@ namespace MekashronTest.Controllers
         [HttpPost]
         public IActionResult Signup([FromForm] Register newCustomer)
         {
-            newCustomer.SignupIP = "127.0.0.0";
-      
-
             MekashronService.RegisterNewCustomerRequest registerNewCustomerRequest = new MekashronService.RegisterNewCustomerRequest()
             {
-                aID = newCustomer.aID,
                 CountryID = newCustomer.CountryID,
                 Email = newCustomer.Email,
                 FirstName = newCustomer.FirstName,
                 LastName = newCustomer.LastName,
                 Mobile = newCustomer.Mobile,
-                Password = newCustomer.Password,
-                SignupIP = newCustomer.SignupIP
+                Password = newCustomer.Password
             };
 
             MekashronRequestResult mekashronRequestResult = _mekashronClient.Register(registerNewCustomerRequest);
